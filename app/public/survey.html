@@ -1,0 +1,123 @@
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <title>Find Friend
+        </title>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>About You</h2>
+                </div>
+                <form style="padding:10px">
+                    <div class="form-group">
+                        <div style="margin:5px">
+                            <label for="name">Name(Required)</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Enter Name">
+                        </div>
+                        <div style="margin:5px">
+                            <label for="photo">Link to Photo Image (Required)</label>
+                            <input type="text" class="form-control" id="inputPhoto" placeholder="link to picture">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- //questionaire -->
+
+
+        <template>
+            <div class="form-group">
+                <h3 class="question-number">Question </h3>
+                <label>
+                    <h4 class="question">You rarely get carried away by fantasies.</h4>
+                </label>
+                <select class="form-control options">
+                    <option selected>Select Option</option>
+                    <option class="choice">1</option>
+                    <option class="choice">2</option>
+                    <option class="choice">3</option>
+                    <option class="choice">4</option>
+                    <option class="choice">5</option>
+                </select>
+            </div>
+        </template>
+
+
+
+
+    </body>
+    <script>
+        const questionaires = [
+
+            "Your mind is always buzzing with unexplored ideas and plans.",
+            "Generally speaking, you rely more on your experience than your imagination.",
+            "You find it easy to stay relaxed and focused even when there is some pressure.",
+            "You rarely do something just out of sheer curiosity.",
+            "People can rarely upset you.",
+            "It is often difficult for you to relate to other people’s feelings.",
+            "In a discussion, truth should be more important than people’s sensitivities.",
+            "You rarely get carried away by fantasies and ideas.",
+            "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+            "You feel more energetic after spending time with a group of people.",
+
+        ]
+        const options =
+            [
+                {
+                    label: "1 (Strongly Disagree)",
+                    value: 1
+                },
+                {
+                    label: "2",
+                    value: 2
+                },
+                {
+                    label: "3",
+                    value: 3
+                },
+                {
+                    label: "4",
+                    value: 4
+                },
+                {
+                    label: "5 (Strongly Agree)",
+                    value: 5
+                }
+            ];
+
+        function displayQuestions() {
+            var question = $("template");
+            var number = $(".question-number")
+            var options = $(".options")
+            for (let i = 0; i < questionaires.length; i++) {
+                number.text(i);
+                question.text(questionaires(i))
+                options.text(opions)
+
+            }
+        }
+
+
+    </script>
+
+    </html>

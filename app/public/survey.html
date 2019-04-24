@@ -40,7 +40,7 @@
                 <div id="questionaires">
 
                 </div>
-                <button class="btn btn-primary" onclick="submitResult()">Submit</button>
+                <button class="btn btn-primary col-md-12" onclick="submitResult()">Submit</button>
             </form>
         </div>
     </div>
@@ -52,16 +52,17 @@
         <div class="form-group">
             <h3 class="question-number"> </h3>
             <label>
-                <h4 class="question"></h4>
+                <p class="question" style="font-size:20px"></p>
             </label>
-            <select class="form-control options" name="scores">
+            <select class="form-control options col-md-3" name="scores" style="cursor:pointer">
                 <option selected value="">Select Option</option>
 
             </select>
         </div>
+        <hr>
     </template>
 
-
+<!-- modal -->
 
     <div class="modal fade" id="displayFriend" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -74,7 +75,7 @@
                 </div>
                 <div class="modal-body">
                     <p id="friendName"></p>
-                    <img id="friendImage">
+                    <img id="friendImage" style="height:200px;width:auto">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -40,6 +40,7 @@ app.get("/home", function(request, respose) {
   respose.sendFile(path.join(__dirname, "../public/home.html"));
 });
 
+// API routes
 app.get("/api/friends", function(request, respose) {
   respose.json(friends);
 });
@@ -51,6 +52,7 @@ app.post("/api/friends", function(request, respose) {
   respose.json(bestFriend);
 });
 
+//find the best match
 function findBestFriend(friends, friend) {
   friends.sort(function(f1, f2) {
     const f1ScoreDiff = compareScore(f1.scores, friend.scores);
@@ -60,7 +62,7 @@ function findBestFriend(friends, friend) {
 
   return friends[0];
 }
-
+//  Compare scores
 function compareScore(score1, score2) {
   let total = 0;
   score1.forEach((score, i) => {

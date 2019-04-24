@@ -166,7 +166,7 @@
             });
 
             if (!name || !photo || invalidScore) {
-                alert("Invalid");
+                alert("Please fill all the inputs and select the answer");
                 return;
             }
             $.post("/api/friends", friend, function (bestFriend) {

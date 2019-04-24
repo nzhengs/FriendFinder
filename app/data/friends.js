@@ -30,9 +30,32 @@ app.get("/home", function(request, respose) {
   respose.sendFile(path.join(__dirname, "../public/home.html"));
 });
 
-app.post("/api/friends", function(request, respose) {
-  const friend = request.body;
-  console.log(friend);
-  friends.push(friend);
+app.get("/api/friends", function(request, respose) {
   respose.json(friends);
 });
+
+app.post("/api/friends", function(request, respose) {
+  const friend = request.body;
+  const bestFriend = findBestFriend(friends, friend);
+  friends.push(friend);
+  respose.json(bestFriend);
+});
+
+function findBestFriend(friends, friend) {
+  friends.sort(function(f1, f2) {
+    const f1ScoreDiff = compareScore(f1.scores, friend.scores);
+    const f2ScoreDiff = compareScore(f2.scores, friend.scores);
+    return f1ScoreDiff - f2ScoreDiff;
+  });
+
+  return friends[0];
+}
+
+function compareScore(score1, score2) {
+  let total = 0;
+  score1.forEach((score, i) => {
+    let diff = Math.abs(score1[i] - score2[i]);
+    total = total + diff;
+  });
+  return total;
+}

@@ -1,72 +1,70 @@
-<DOCTYPE html>
-    <html>
+<!DOCTYPE html>
+<html>
 
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-        <title>Find Friend
-        </title>
-    </head>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Find Friend
+    </title>
+</head>
 
-    <body>
-
-        <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h2>About You</h2>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>About You</h2>
+            </div>
+            <form style="padding:10px" action="/api/friends" method="POST">
+                <div class="form-group">
+                    <div style="margin:5px">
+                        <label for="name">Name(Required)</label>
+                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Enter Name">
+                    </div>
+                    <div style="margin:5px">
+                        <label for="photo">Link to Photo Image (Required)</label>
+                        <input type="text" name="photo" class="form-control" id="inputPhoto"
+                            placeholder="link to picture">
+                    </div>
                 </div>
-                <form style="padding:10px">
-                    <div class="form-group">
-                        <div style="margin:5px">
-                            <label for="name">Name(Required)</label>
-                            <input type="text" class="form-control" id="inputName" placeholder="Enter Name">
-                        </div>
-                        <div style="margin:5px">
-                            <label for="photo">Link to Photo Image (Required)</label>
-                            <input type="text" class="form-control" id="inputPhoto" placeholder="link to picture">
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                <br>
+                <div id="questionaires">
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
+    </div>
 
-        <!-- //questionaire -->
-
-
-        <template>
-            <div class="form-group">
-                <h3 class="question-number">Question </h3>
-                <label>
-                    <h4 class="question">You rarely get carried away by fantasies.</h4>
-                </label>
-                <select class="form-control options">
-                    <option selected>Select Option</option>
-                    <option class="choice">1</option>
-                    <option class="choice">2</option>
-                    <option class="choice">3</option>
-                    <option class="choice">4</option>
-                    <option class="choice">5</option>
-                </select>
-            </div>
-        </template>
+    <!-- //questionaire -->
 
 
+    <template id="questionTemplate">
+        <div class="form-group">
+            <h3 class="question-number"> </h3>
+            <label>
+                <h4 class="question"></h4>
+            </label>
+            <select class="form-control options" name="scores">
+                <option selected value="0">Select Option</option>
 
+            </select>
+        </div>
+    </template>
 
-    </body>
     <script>
+
+
         const questionaires = [
 
             "Your mind is always buzzing with unexplored ideas and plans.",
@@ -104,20 +102,32 @@
                     value: 5
                 }
             ];
+        displayQuestions()
 
         function displayQuestions() {
-            var question = $("template");
-            var number = $(".question-number")
-            var options = $(".options")
-            for (let i = 0; i < questionaires.length; i++) {
-                number.text(i);
-                question.text(questionaires(i))
-                options.text(opions)
+            const questionEl = $("")
+            var optionsSelect = $(".options");
+            questionaires.forEach(function (questionaire, index) {
+                const templateHtml = $("#questionTemplate").html();
+                const questionTemplate = $(templateHtml);
+                questionTemplate.find(".question").text(questionaire);
+                questionTemplate.find(".question-number").text(`Question ${index + 1}`);
 
-            }
+                options.forEach(function (option) {
+                    const optionEl = $("<option>");
+                    optionEl.attr("value", option.value)
+                    const opt = optionEl.text(option.label);
+                    questionTemplate.find(".options").append(optionEl);
+                })
+
+                $("#questionaires").append(questionTemplate)
+
+
+            })
         }
 
 
     </script>
+</body>
 
-    </html>
+</html>

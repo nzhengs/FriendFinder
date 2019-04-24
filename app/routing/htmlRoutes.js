@@ -1,7 +1,14 @@
-app.get("/survey", function(request, respose) {
-    respose.sendfile(path.join(__dirname, "../public/survey.html"));
+var path = require("path");
+
+// Exports
+module.exports = function(app) {
+  // Survey request
+  app.get("/survey", function(request, response) {
+    response.sendFile(path.join(__dirname, "../public/survey.html"));
   });
-  
-  app.get("/home", function(request, respose) {
-    respose.sendfile(path.join(__dirname, "../public/home.html"));
+
+  // anything requesting getting to HTML home page
+  app.get("*", function(request, response) {
+    response.sendFile(path.join(__dirname, "../public/home.html"));
   });
+};

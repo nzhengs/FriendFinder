@@ -6,9 +6,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -25,23 +23,24 @@
             <div class="card-header">
                 <h2>About You</h2>
             </div>
-            <form style="padding:10px" action="/api/friends" method="POST">
+            <form style="padding:10px" onsubmit="return false;">
                 <div class="form-group">
                     <div style="margin:5px">
                         <label for="name">Name(Required)</label>
-                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Enter Name">
+                        <input type="text" name="name" class="form-control" id="inputName" placeholder="Enter Name"
+                            required>
                     </div>
                     <div style="margin:5px">
                         <label for="photo">Link to Photo Image (Required)</label>
                         <input type="text" name="photo" class="form-control" id="inputPhoto"
-                            placeholder="link to picture">
+                            placeholder="link to picture" required>
                     </div>
                 </div>
                 <br>
                 <div id="questionaires">
 
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary" onclick="submitResult()">Submit</button>
             </form>
         </div>
     </div>
@@ -56,11 +55,34 @@
                 <h4 class="question"></h4>
             </label>
             <select class="form-control options" name="scores">
-                <option selected value="0">Select Option</option>
+                <option selected value="">Select Option</option>
 
             </select>
         </div>
     </template>
+
+
+
+    <div class="modal fade" id="displayFriend" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="match">Best Match</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="friendName"></p>
+                    <img id="friendImage">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
 
@@ -124,6 +146,34 @@
 
 
             })
+        }
+
+        function submitResult() {
+            const name = $("input[name=name]").val();
+            const photo = $("input[name=photo]").val();
+            const scores = $('select[name=scores]')
+                .map(function () {
+                    return $(this).children('option:selected').val()
+                })
+                .get();
+
+            const friend = { name, photo, scores };
+
+            let invalidScore = true;
+            scores.forEach(function (score) {
+                invalidScore = invalidScore && !score;
+            });
+
+            if (!name || !photo || invalidScore) {
+                alert("Invalid");
+                return;
+            }
+            $.post("/api/friends", friend, function (bestFriend) {
+                console.log(bestFriend);
+                $("#friendName").text(bestFriend.name);
+                $("#friendImage").attr("src", bestFriend.photo);
+                $('#displayFriend').modal('show');
+            });
         }
 
 
